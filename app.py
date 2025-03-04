@@ -1,66 +1,72 @@
-from numpy import random
 import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
 
-x = random.randint(100, size=(5))
-y = random.randint(100, size=(3,5))
+x = [1,2,3,4]
+y = [4,5,6,7]
+'''
+z = []
+for i,j in zip(x,y):
+    z.append(i+j)
+'''
 
-f = random.rand(5)
-print(x)
-print(y)
-print(f)
+z = np.add(x,y)
+print(z)
+print(np.subtract(y, x))
+print(np.multiply(y, x))
+print(np.divide(y, x))
+print(np.power(y, x))
+print(np.mod(y, x))
+print(np.divmod(y, x))
+print("Sum of sum in each array: ",np.sum([x,y]))
+print("Show sum in each array: ",np.sum([x,y], axis= 1))
+print("Cummulative Sum: ", np.cumsum(x))
 
-# generate random number from array
-print(random.choice([1,2,3,4,5,6]))
-print(random.randint(100, size=(5)))
-print(random.rand(3,5))
-print(random.choice([1,2,3,4,5,6],size=(3,5)))
+def myadd(x,y):
+    return x + y
 
-# random distribution
-print(random.choice([1,2,3,4,5,6], size=(100), p=[0.1, .3, .2, .3, .1, 0]))
-print(random.choice([1,2,3,4,5,6], size=(3,2), p=[0.1, .3, .2, .3, .1, 0]))
+myadd = np.frompyfunc(myadd, 2, 1)
+print(myadd([1,2,3],[4,5,6]))
+print("Function type: ", type(myadd), type(zip))
 
-# shuffling/ permutation of array
-arr = np.array([1,2,3,4,5,6])
-print(random.permutation(arr))
-print(arr)
-random.shuffle(arr) #change original arr
-print(arr)
+# Rounding Decimal
+print(np.trunc([-3.1666, 3.6667]))
+print(np.fix([-3.1666, 3.6667]))
+print(np.floor([-3.1666, 3.6667]))
+print(np.ceil([-3.1666, 3.6667]))
+print(np.around(-3.1666, 3))
 
-# seaborn module
-# sns.distplot(arr,hist=False)
-# plt.show()
+# Logarithm
+print(np.log2(np.arange(1,10)))
+print(np.log10(np.arange(1,10)))
+print(np.log(np.arange(1,10))) # nature log - e
+print(np.log1p(np.arange(1,10)))
 
-print(random.normal(loc=1, scale=2, size=(2,3)))
+from math import log
+log_base_n = np.frompyfunc(log, 2, 1)
+print(log_base_n(100, 10))
 
-# sns.distplot(random.normal(size=1000), hist=False)
+# Products
+print(np.prod(x))
+print(np.prod([x,y]))
+print(np.prod([x,y], axis=1))
+print(np.cumprod(x))
+print(np.prod([x,y]))
 
-# plt.show()
+# Trigonometric
+arr = np.array([np.pi/2, np.pi/3,np.pi/4,np.pi/4,np.pi/5])
+deg_arr = np.array([90, 180, 270,360])
 
-print(random.binomial(n=10, p=.5, size=5))
+print(np.sin(arr))
+print(np.deg2rad(deg_arr))
+print(np.rad2deg(arr))
+print(np.arcsin(np.array([1,-1,0.1])))
+print(np.hypot(3,4)) # find hypotenues
+print(np.arcsinh(1.0))
 
-# sns.distplot(random.normal(loc=50, scale=5, size=1000), hist=False, label='normal')
-# sns.distplot(random.binomial(n=100, p=0.5, size=1000), hist=False, label='binomial')
-
-# plt.show()
-
-print(random.poisson(lam=2, size=10))
-print(random.uniform(size=(2,3)))
-
-print(random.logistic(loc=1, scale=2, size=(2,3)))
-
-# Multinomial Distribution
-print(random.multinomial(n=6, pvals=[1/6,1/6,1/6,1/6,1/6,1/6]))#dice roll
-
-# Exponential Distribution
-print(random.exponential(scale=2, size=(2,3)))
-
-# Chi Square Distribution
-print(random.chisquare(df=2, size=(2,3)))
-
-# Rayleigh Distribution
-print(random.rayleigh(scale=2, size=(2,3)))
-
-# Pareto Distribution
-print(random.pareto(a=2, size=(2,3)))
+# set operation
+arr1 = np.array([1,2,3,4,4])
+arr2 = np.array([4,5,6,7])
+print(np.unique(arr1))
+print(np.union1d(arr1,arr2))
+print(np.intersect1d(arr1,arr2, assume_unique=True))
+print(np.setdiff1d(arr1,arr2, assume_unique=True))
+print(np.setxor1d(arr1,arr2, assume_unique=True))
